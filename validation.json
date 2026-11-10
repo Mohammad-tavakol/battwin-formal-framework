@@ -1,0 +1,388 @@
+{
+  "date": "2026-11-10",
+  "python": "3.11.9",
+  "platform": "Windows",
+  "scientific_implementation_changed": false,
+  "models_refitted": false,
+  "original_artifacts_unchanged": 29,
+  "original_code_cells_unchanged": 29,
+  "unit_tests_passed": 4,
+  "packaged_artifacts_verified": 32,
+  "complete_experiment_runs": [
+    {
+      "dataset": "test_aggregated_deterministic.xlsx",
+      "rows": 38,
+      "code_cells_completed": 29,
+      "original_execution_checks_passed": true
+    },
+    {
+      "dataset": "train_valid_aggregated_deterministic.xlsx",
+      "rows": 291,
+      "code_cells_completed": 29,
+      "original_execution_checks_passed": true
+    }
+  ],
+  "direct_original_notebook_equivalence": {
+    "tables_compared": 56,
+    "all_exactly_equal": true,
+    "records": [
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "simulation/RF/predictions.csv",
+        "exactly_equal": true,
+        "rows": 38
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "simulation/DNN/predictions.csv",
+        "exactly_equal": true,
+        "rows": 38
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "importance/DNN/finite_difference_detail.csv",
+        "exactly_equal": true,
+        "rows": 5472
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "importance/DNN/finite_difference_summary.csv",
+        "exactly_equal": true,
+        "rows": 144
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "importance/DNN/step_stability.csv",
+        "exactly_equal": true,
+        "rows": 108
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "importance/DNN/feedback_finite_differences.csv",
+        "exactly_equal": true,
+        "rows": 3
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "importance/RF/pfi.csv",
+        "exactly_equal": true,
+        "rows": 125
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "validation/comparison.csv",
+        "exactly_equal": true,
+        "rows": 16
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "porosity/comparison.csv",
+        "exactly_equal": true,
+        "rows": 38
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "porosity/metrics.csv",
+        "exactly_equal": true,
+        "rows": 4
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/summary.csv",
+        "exactly_equal": true,
+        "rows": 2
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "inverse/summary.csv",
+        "exactly_equal": true,
+        "rows": 2
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/RF/controlled_predictions.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/RF/held_predictions.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/RF/trace.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "parametric/RF/predictions.csv",
+        "exactly_equal": true,
+        "rows": 108
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "parametric/RF/physical_checks.csv",
+        "exactly_equal": true,
+        "rows": 108
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "inverse/RF/all_evaluated_paths.csv",
+        "exactly_equal": true,
+        "rows": 306
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "inverse/RF/matching_paths.csv",
+        "exactly_equal": true,
+        "rows": 1
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "inverse/RF/nearest_evaluated_paths.csv",
+        "exactly_equal": true,
+        "rows": 5
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/DNN/controlled_predictions.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/DNN/held_predictions.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/DNN/trace.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "parametric/DNN/predictions.csv",
+        "exactly_equal": true,
+        "rows": 108
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "parametric/DNN/physical_checks.csv",
+        "exactly_equal": true,
+        "rows": 108
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "inverse/DNN/all_evaluated_paths.csv",
+        "exactly_equal": true,
+        "rows": 306
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "inverse/DNN/matching_paths.csv",
+        "exactly_equal": true,
+        "rows": 0
+      },
+      {
+        "dataset": "test_aggregated_deterministic.xlsx",
+        "table": "inverse/DNN/nearest_evaluated_paths.csv",
+        "exactly_equal": true,
+        "rows": 5
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "simulation/RF/predictions.csv",
+        "exactly_equal": true,
+        "rows": 291
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "simulation/DNN/predictions.csv",
+        "exactly_equal": true,
+        "rows": 291
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "importance/DNN/finite_difference_detail.csv",
+        "exactly_equal": true,
+        "rows": 41904
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "importance/DNN/finite_difference_summary.csv",
+        "exactly_equal": true,
+        "rows": 144
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "importance/DNN/step_stability.csv",
+        "exactly_equal": true,
+        "rows": 108
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "importance/DNN/feedback_finite_differences.csv",
+        "exactly_equal": true,
+        "rows": 3
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "importance/RF/pfi.csv",
+        "exactly_equal": true,
+        "rows": 125
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "validation/comparison.csv",
+        "exactly_equal": true,
+        "rows": 16
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "porosity/comparison.csv",
+        "exactly_equal": true,
+        "rows": 291
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "porosity/metrics.csv",
+        "exactly_equal": true,
+        "rows": 4
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/summary.csv",
+        "exactly_equal": true,
+        "rows": 2
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "inverse/summary.csv",
+        "exactly_equal": true,
+        "rows": 2
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/RF/controlled_predictions.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/RF/held_predictions.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/RF/trace.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "parametric/RF/predictions.csv",
+        "exactly_equal": true,
+        "rows": 108
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "parametric/RF/physical_checks.csv",
+        "exactly_equal": true,
+        "rows": 108
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "inverse/RF/all_evaluated_paths.csv",
+        "exactly_equal": true,
+        "rows": 559
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "inverse/RF/matching_paths.csv",
+        "exactly_equal": true,
+        "rows": 4
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "inverse/RF/nearest_evaluated_paths.csv",
+        "exactly_equal": true,
+        "rows": 5
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/DNN/controlled_predictions.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/DNN/held_predictions.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "feedback/scenario/DNN/trace.csv",
+        "exactly_equal": true,
+        "rows": 80
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "parametric/DNN/predictions.csv",
+        "exactly_equal": true,
+        "rows": 108
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "parametric/DNN/physical_checks.csv",
+        "exactly_equal": true,
+        "rows": 108
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "inverse/DNN/all_evaluated_paths.csv",
+        "exactly_equal": true,
+        "rows": 559
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "inverse/DNN/matching_paths.csv",
+        "exactly_equal": true,
+        "rows": 9
+      },
+      {
+        "dataset": "train_valid_aggregated_deterministic.xlsx",
+        "table": "inverse/DNN/nearest_evaluated_paths.csv",
+        "exactly_equal": true,
+        "rows": 5
+      }
+    ]
+  },
+  "strict_historical_comparison": {
+    "tables_passed": 113,
+    "tables_flagged": 5,
+    "rtol": 2e-05,
+    "atol": 0.0002,
+    "flagged_tables": [
+      "test_aggregated_deterministic/importance/DNN/finite_difference_detail.csv",
+      "test_aggregated_deterministic/importance/DNN/finite_difference_summary.csv",
+      "train_valid_aggregated_deterministic/importance/DNN/finite_difference_detail.csv",
+      "train_valid_aggregated_deterministic/importance/DNN/finite_difference_summary.csv",
+      "train_valid_aggregated_deterministic/inverse/RF/nearest_evaluated_paths.csv"
+    ],
+    "interpretation": "Four DNN derivative tables differ from historical exports; the direct original notebook reproduces current package tables exactly. A fifth table contains the same five nearest-path candidates with the order of two tied candidates swapped."
+  },
+  "wheel": {
+    "built": true,
+    "all_package_members_match_final_source": true,
+    "sha256": "543630d58efd92e376d02e1ef87a8aa3862e88918f640d7b78cb7a00e10ad820",
+    "bytes": 40572882,
+    "installed_wheel_preservation_tests_passed": 4
+  }
+}
