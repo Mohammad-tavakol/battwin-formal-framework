@@ -25,7 +25,7 @@ class FrameworkTests(unittest.TestCase):
 
     def test_artifacts_and_datasets(self):
         manifest = verify_assets()
-        self.assertEqual(len(manifest["files"]), 28)
+        self.assertEqual(len(manifest["files"]), 24)
         self.assertEqual(len(self.test), 38)
         self.assertEqual(len(load_dataset("train_valid")), 291)
 

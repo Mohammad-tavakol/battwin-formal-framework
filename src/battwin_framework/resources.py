@@ -19,7 +19,7 @@ def bundle_directory():
 
 
 def verify_assets():
-    """Verify the 24 bundled model artifacts and four original data workbooks."""
+    """Verify the 20 required model artifacts and four original data workbooks."""
     manifest = json.loads((ASSETS / "manifest.json").read_text(encoding="utf-8"))
     for relative, expected in manifest["files"].items():
         path = ASSETS / relative

@@ -17,7 +17,7 @@ python -m pip install --no-deps .
 battwin-framework verify
 ```
 
-The package contains the 24 original model artifacts and four workbooks. No model
+The package contains the 20 required model artifacts and four workbooks. No model
 or dataset download is needed for inference. Dependencies remain pinned.
 
 ## Start here
