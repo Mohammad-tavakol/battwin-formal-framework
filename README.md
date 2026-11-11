@@ -1,14 +1,13 @@
 # BATTWIN formal framework
 
-Python packaging of the existing `Framework-level/Framework.ipynb`, with its
-scientific implementation and supplied trained artifacts preserved.
+A modular library for the coupled Mixing → Coating/Drying → Calendering →
+Electrochemical framework, with explicit APIs for simulation, validation,
+inverse design, sensitivity and feedback. The library uses saved model weights,
+preprocessing and physical-unit target transforms.
 
-## Install and run
+## Install
 
-Use Python 3.11. From this repository:
-
-On Windows, clone into a short path such as `C:\src\battwin-framework` to keep
-wheel-build paths within the operating system's path-length limit.
+Use Python 3.11. On Windows, use a short checkout path such as `C:\src\battwin-framework`.
 
 ```powershell
 python -m venv .venv
@@ -16,103 +15,102 @@ python -m venv .venv
 python -m pip install -r requirements-lock.txt
 python -m pip install --no-deps .
 battwin-framework verify
-battwin-framework reproduce runs --quiet
 ```
 
-The reproduction command executes the complete original experiment sequence for
-the unseen aggregate (38 rows), then the familiar aggregate (291 rows). Each
-dataset has its own output directory under `runs/codex_work/results/`.
-The original notebook, models and four datasets are copied into `runs/` so that
-the same experiments can also be run interactively from `runs/Framework.ipynb`.
+The package contains the 24 original model artifacts and four workbooks. No model
+or dataset download is needed for inference. Dependencies remain pinned.
 
-For one dataset:
-
-```powershell
-battwin-framework run runs --dataset test_aggregated_deterministic.xlsx --quiet
-```
-
-To load the chains and predict from Python:
+## Start here
 
 ```python
-from battwin_framework import Experiment
+from battwin_framework import Framework
 
-experiment = Experiment("runs", save_results=False, quiet=True)
-predictions = experiment.predict()
-rf = predictions["RF"]
-dnn = predictions["DNN"]
+framework = Framework.from_bundle()
+test = framework.load_dataset("test")
 
-# Access the original functions, state, chains and experiment results.
-state = experiment.namespace
-experiment.run()  # continue through every remaining original notebook cell
+predictions = framework.predict(test)  # independent RF and DNN DataFrames
+validation = framework.validate(test)  # chain versus standalone electrochemical
+print(validation.metrics)             # R², RMSE, MAE, mean error, MAPE, n, status
+validation.save("results/validation", plots=True)
+
+print(framework.describe("DNN"))
+print(framework.models.schema("DNN", "Calendering"))
 ```
 
-`save_results=False` retains the notebook's original in-memory mode. Default
-execution saves its existing tables and figures. `--through-cell 24` runs through
-simulation and validation; omitting it runs all 29 code cells. `--quiet` suppresses
-notebook display objects; scientific calculations and exports are unchanged.
+Computation stays in memory until `.save(directory)` or `.plot(directory)` is
+called. Models load lazily; each Framework has its own replaceable model registry.
 
-## What is preserved
+## Capabilities
 
-- Named-feature orchestration and the independent indexed mathematical appendix.
-- The RF-labelled chain, including its supplied ExtraTrees estimators, and the
-  independent DNN chain with saved preprocessors and exact target inverses.
-- Feature names, column order, category handling, units, missing-input checks,
-  upstream predictions, and protection against measured-output leakage.
-- Feedback timing and law, disturbance scenario, sweep, PFI seed/repeats,
-  finite-difference scales and stability tests, and inverse selection criteria.
-- Every original experiment setting, model weight, workbook, and notebook byte.
+| Operation | Entry point |
+|---|---|
+| Coupled predictions | `framework.predict(data)` |
+| Standalone stage | `framework.predict_stage(data, family="DNN", stage="Calendering")` |
+| Accuracy and comparison figures | `framework.validate(data)` |
+| Inverse design / existing optimiser | `framework.random_search(targets=...)` |
+| Replace one model | `framework.replace_model(family, stage, model)` |
+| RF permutation importance | `framework.sensitivity.pfi(data)` |
+| DNN forward finite differences | `framework.sensitivity.finite_difference(data)` |
+| DNN automatic differentiation | `framework.sensitivity.autodiff(data)` |
+| AD/FD comparison and step study | `framework.sensitivity.compare(data)` |
+| Additive feedback | `framework.run_feedback(data, ...)` |
+| Matched disturbance scenario | `framework.disturbance_rejection(data)` |
+| Cartesian sweep | `framework.parametric_sweep(base_row, ranges)` |
+| Porosity, physical screens, correlations | `porosity`, `search`, `parametric` modules |
+| Sequential history / indexed maths | `framework.simulate(...)`, `NamedStateSpaceLine`, `StateSpaceLine` |
 
-The package uses the models already referenced by `Framework.ipynb`. It does not
-substitute other upstream models from neighbouring project folders. The notebook
-performs inference and experiments with frozen models; it does not train them.
-Reproducing upstream model training is outside this notebook's implementation.
+The inverse method remains the existing **independent local random search** around
+training recipes, followed by target and physical screening.
 
-## Package layout
+```python
+from battwin_framework.schema import GRAVIMETRIC, VOLUMETRIC
 
-`experiment.py` provides the Python API and a separate namespace per experiment.
-`core.py` and `indexed.py` expose the original `NamedStateSpaceLine` and
-`StateSpaceLine` classes directly for reuse, with their mathematical source
-unchanged. `cli.py` provides command-line access. `assets/implementation.py` contains the
-notebook's code cells extracted in their original order, without rewriting any
-scientific statement or function body. The runner executes those sections in a
-shared session namespace, preserving the notebook's global-variable semantics.
-Only the initial `PROJECT_DIR`, `DATA_FILE` and `SAVE_RESULTS` assignments are
-overridden for the requested run. All other settings remain the originals.
+search = framework.random_search(
+    targets={GRAVIMETRIC: 165., VOLUMETRIC: 480.},
+    n_sweeps=1000, random_seed=42, tolerance_fraction=.02,
+)
+print(search.summary)
+print(search.models["DNN"].matches)
+search.save("results/inverse", plots=True)
 
-`assets/` also contains the exact original notebook, 24 supplied model files,
-four workbooks, an integrity manifest, and a compressed numerical-results
-reference for both datasets. Model files are actual binaries, not download
-placeholders. No external dataset or model download is required.
+ad = framework.sensitivity.autodiff(test)
+print(ad.summary)
+comparison = framework.sensitivity.compare(test)
+comparison.save("results/ad_vs_fd", plots=True)
+```
 
-The existing Keras inference compatibility code is retained verbatim. Any
-compatibility copies are written into the experiment workspace; bundled model
-files and weight payloads remain unchanged. Existing edited workspace inputs are
-never overwritten by initialization.
+See the [usage guide](docs/USAGE.md) for model replacement, all sensitivity methods,
+search sampling, feedback, units and outputs. The [API map](docs/API.md) explains
+module boundaries and result fields. [Examples](examples/) are executable scripts.
 
-## Verification
+## Command line
+
+```powershell
+battwin-framework describe --family DNN
+battwin-framework predict --dataset test --family DNN --output results/prediction
+battwin-framework validate --dataset test --output results/validation --plots
+battwin-framework sensitivity --method pfi --dataset test --output results/pfi
+battwin-framework sensitivity --method compare --dataset test --output results/ad_vs_fd --plots
+battwin-framework search --cg 165 --cv 480 --sweeps 1000 --seed 42 --tolerance .02 --output results/inverse --plots
+battwin-framework feedback --dataset test --output results/feedback --plots
+```
+
+Use `--project PATH` for a directory containing your `best models/` and datasets.
+Each command has `--help`. Custom controller sequences and model replacement use
+the Python API.
+
+## Reproducibility
+
+The library imports Python modules without executing notebook cells. Named and
+indexed state-space mathematics are directly importable. All experiments use
+the supplied frozen models; no upstream model training is performed by this package.
 
 ```powershell
 python -m unittest discover -s tests -v
-python tests/check_reproduction.py runs
-python tests/check_notebook_equivalence.py runs
 ```
 
-The unit checks cover artifact hashes, extracted-code equivalence, workspace
-protection and the delayed feedback law. The reproduction check compares generated
-numerical tables with the original saved results. Numerical comparison uses
-explicit tolerances; exact equality across different numerical runtimes or CPU
-implementations is not assumed. Figures are regenerated by the original plotting
-code; fonts can vary with the operating system. The notebook-equivalence check
-independently executes all original scientific cells in the current environment
-with exports disabled, and requires exact equality for the selected numerical
-tables covering predictions, feedback, sweeps, importance and inverse selection.
-
-The strict historical comparison currently flags four DNN derivative tables and
-the order of two tied nearest-path diagnostics. It returns a nonzero exit status
-for these differences; they are not suppressed or used to change the science.
-The direct notebook-equivalence check tests whether packaging changes results.
-See the validation report for the measured differences and acceptance evidence.
-
-`PACKAGING_REPORT.md` records the validation actually performed for this package.
-The original source directory is left unchanged. Generated runs, caches and wheel
-builds are excluded from version control.
+Tests check artifact integrity, reference prediction metrics, seeded search,
+physical rejection, analytical gradients, feedback timing, model replacement,
+and exported plot data. Dependencies, datasets, trained models and random-search
+settings are supplied for reproduction. Numerical rounding can depend on the
+TensorFlow/CPU environment; the forward graph includes explicit parity checks.

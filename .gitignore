@@ -8,3 +8,6 @@ runs/
 .runtime_cache/
 codex_work/
 .DS_Store
+.local-history/
+results/
+.pytest_cache/

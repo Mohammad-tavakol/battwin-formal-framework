@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "battwin-formal-framework"
-version = "0.1.0"
-description = "Faithful Python packaging of the BATTWIN chain-level Framework.ipynb experiments"
+version = "0.2.0"
+description = "Modular BATTWIN coupled-model simulation, sensitivity, feedback and inverse search"
 readme = "README.md"
 requires-python = ">=3.11,<3.12"
 dependencies = [
@@ -24,3 +24,6 @@ namespaces = false
 
 [tool.setuptools.package-data]
 battwin_framework = ["assets/**/*", "assets/*"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["**/__pycache__/*", "*.pyc"]
