@@ -116,3 +116,12 @@ physical rejection, analytical gradients, feedback timing, model replacement,
 and exported plot data. Dependencies, datasets, trained models and random-search
 settings are supplied for reproduction. Numerical rounding can depend on the
 TensorFlow/CPU environment; the forward graph includes explicit parity checks.
+
+## Licence
+
+The project's original code, documentation and fitted models are licensed under the
+[Apache License, Version 2.0](LICENSE). Academic and commercial use, modification
+and redistribution are permitted subject to the licence terms.
+
+Third-party dependencies and source datasets retain their respective licences and
+attribution requirements. This licence does not replace those terms.

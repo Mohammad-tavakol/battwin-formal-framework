@@ -5,6 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "battwin-formal-framework"
 version = "0.2.0"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 description = "Modular BATTWIN coupled-model simulation, sensitivity, feedback and inverse search"
 readme = "README.md"
 requires-python = ">=3.11,<3.12"
