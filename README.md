@@ -5,6 +5,8 @@ Electrochemical framework, with explicit APIs for simulation, validation,
 inverse design, sensitivity and feedback. The library uses saved model weights,
 preprocessing and physical-unit target transforms.
 
+paper preprint: Tavakol Sadrabadi, Mohammad and Su, Zhizhuo and Faraji Niri, Mona and Ceglarek, Darek, A Formal Digital Twinning Framework for Integrated Multi-Stage Modelling and Analysis of Battery Manufacturing (November 10, 2026). Available at SSRN: https://ssrn.com/abstract=7727858 or http://dx.doi.org/10.2139/ssrn.7727858
+
 ## Install
 
 Use Python 3.11. On Windows, use a short checkout path such as `C:\src\battwin-framework`.
